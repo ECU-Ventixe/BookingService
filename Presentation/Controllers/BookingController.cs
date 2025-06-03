@@ -17,7 +17,7 @@ namespace Presentation.Controllers
             {
                 return BadRequest("Booking cannot be null.");
             }
-            var eventResponse = await _httpClient.GetAsync($"https://localhost:7121/api/event/getevent/{ticket.EventId}");
+            var eventResponse = await _httpClient.GetAsync($"https://ventixe-event-ecu-dvddbqcpewahfdcz.swedencentral-01.azurewebsites.net/api/event/getevent/{ticket.EventId}");
             
             var eventContent = await eventResponse.Content.ReadFromJsonAsync<EventDto>();
 
@@ -44,7 +44,7 @@ namespace Presentation.Controllers
                 TicketQuantity = ticket.TicketQuantity
             };
 
-            var ticketResponse = await _httpClient.PostAsJsonAsync("https://localhost:7047/api/ticket/create", ticketDto);
+            var ticketResponse = await _httpClient.PostAsJsonAsync("https://ventixe-ticket-ecu-bpbqcchqddg6ath9.swedencentral-01.azurewebsites.net/api/ticket/create", ticketDto);
             if (!ticketResponse.IsSuccessStatusCode)
             {
                 return StatusCode((int)ticketResponse.StatusCode, "Failed to create ticket.");
